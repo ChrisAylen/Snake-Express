@@ -1,0 +1,53 @@
+.App {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 0;
+    background-color: #74e485;
+  }
+  
+  a {
+    color: #ffffff;
+  }
+  
+  /* Homepage */
+  .Homepage {
+    background-image: url;
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    height: 100vh;
+  }
+  
+  .homepage-menu {
+    position: relative;
+    top: 120px;
+  }
+  
+  .homepage-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  .homepage-form>h1 {
+    margin: 0 30px;
+  }
+  
+  .homepage-join {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .homepage-join>input {
+    font-size: 15px;
+    width: 150px;
+    line-height: 1.5em;
+  }
+  
+  .login {
+    background-image: url;
+  }
+  
+  .signup {
+    background-image: url;
+  }

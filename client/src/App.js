@@ -8,12 +8,19 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import './App.css';
+import Game from './components/Game';
+import HighScores from './components/HighScores';
+import Navbar from './components/Navbar';
+import NewRules from './components/NewRules';
+import PrivateRoute from './PrivateRoute.js';
+import GameOverWon from './components/GameOverWin';
+import GameOverLose from './components/GameOverLose';
+
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Snake from './pages/Snake';
 import Login from './pages/Login';
-import SingleThought from './pages/SingleThought';
-import Profile from './pages/Profile';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -44,44 +51,41 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+
+       <div className="App">
       <Router>
-        <div className="flex-column justify-flex-start min-100-vh">
-          <Header />
-          <div className="container">
-            <Routes>
-              <Route 
-                path="/"
-                element={<Home />}
-              />
-              <Route 
-                path="/login"
-                element={<Login />}
-              />
-              <Route 
-                path="/snake"
-                element={<Snake />}
-              />
-              <Route 
-                path="/signup"
-                element={<Signup />}
-              />
-              <Route 
-                path="/me"
-                element={<Profile />}
-              />
-              <Route 
-                path="/profiles/:username"
-                element={<Profile />}
-              />
-              <Route 
-                path="/thoughts/:thoughtId"
-                element={<SingleThought />}
-              />
-            </Routes>
-          </div>
-          <Footer />
-        </div>
+        
+        <Routes>
+          {/* <Route exact path="/" element={<Home/>}/> */}
+          <Route
+            exact
+            path="/"
+            element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>} />
+            <Route 
+            exact
+            path="/game" 
+            element={
+              <PrivateRoute>
+            <Game/>
+            </PrivateRoute> }/>
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<Signup />} />
+          <Route exact path="/rules" element={<NewRules />} />
+          <Route 
+          exact 
+          path="/highscores" 
+          element={
+            <PrivateRoute>
+          <HighScores />
+          </PrivateRoute>} />
+        </Routes>
+
       </Router>
+
+    </div>
     </ApolloProvider>
   );
 }
