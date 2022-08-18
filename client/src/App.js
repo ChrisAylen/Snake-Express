@@ -17,10 +17,10 @@ import PrivateRoute from './privateRoute.js';
 import GameOverWon from './components/GameOverWin';
 import GameOverLose from './components/GameOverLose';
 
-import Home from './pages/Home';
-import Signup from './pages/Signup';
-import Snake from './pages/Snake';
-import Login from './pages/Login';
+import Home from './components/Home';
+import Signup from './components/Signup';
+import Snake from './components/Snake';
+import Login from './components/Login';
 //import Header from './components/Header';
 //import Footer from './components/Footer';
 

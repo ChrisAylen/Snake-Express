@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 
-import SnakeGame from '../components/Snake/SnakeGame';
+import SnakeGame from './Snake/SnakeGame';
 
 import { QUERY_THOUGHTS } from '../utils/queries';
 
