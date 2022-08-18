@@ -1,94 +1,133 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Form, Button, Alert } from "react-bootstrap";
+import { loginUser } from "../utils/API";
+import Auth from "../utils/auth";
+import Navbar from "./Navbar"
 
-import Auth from '../utils/auth';
+const Login = () => {
+  const [userFormData, setUserFormData] = useState({ email: "", password: "" });
+  const [validated] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
-const Login = (props) => {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { error, data }] = useMutation(LOGIN_USER);
-
-  // update state based on form input changes
-  const handleChange = (event) => {
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
-
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+    setUserFormData({ ...userFormData, [name]: value });
   };
 
-  // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
-    try {
-      const { data } = await login({
-        variables: { ...formState },
-      });
 
-      Auth.login(data.login.token);
-    } catch (e) {
-      console.error(e);
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
     }
 
-    // clear form values
-    setFormState({
-      email: '',
-      password: '',
+    try {
+      const response = await loginUser(userFormData);
+      if (!response.ok) {
+        throw new Error("something went wrong!");
+      }
+
+      const { token, user } = await response.json();
+      Auth.login(token);
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    setUserFormData({
+      username: "",
+      email: "",
+      password: "",
     });
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
-          <div className="card-body">
-            {data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your email"
+    <>
+      <Navbar/>
+    <div className="login h-screen">
+      <br></br>
+      <br></br>
+      <div className="flex mt-20 justify-center items-center">
+        <div className=" container border border-orange-600 w-fit content-center  justify-center items-center rounded pt-8 pb-8 pl-6 pr-6">
+          <Form
+            className="flex flex-col justify-center items-center"
+            noValidate
+            validated={validated}
+            onSubmit={handleFormSubmit}
+          >
+            <Alert
+              onClose={() => setShowAlert(false)}
+              show={showAlert}
+              variant="danger"
+              className="fixed w-auto top-16 bg-red-900 py-2 px-5"
+            >
+              Invalid Username or Password
+            </Alert>
+            <div className="flex justify-center">
+              <Form.Group>
+                <Form.Label htmlFor="email" className="text-orange-600">
+                  Email
+                </Form.Label>
+                <Form.Control
+                  className="text-slate-1000 mx-1 my-2 w-30 bg-slate-900  pl-2"
+                  type="text"
+                  placeholder="Email..."
                   name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
+                  onChange={handleInputChange}
+                  value={userFormData.email}
+                  required
                 />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
+              </Form.Group>
+            </div>
+            <br></br>
+            <div className="flex justify-center">
+              <Form.Group>
+                <Form.Label htmlFor="password" className="text-orange-600">
+                  Password
+                </Form.Label>
+                <Form.Control
+                  className="text-slate-1000 mx-1 my-2 w-30 bg-slate-900 pl-2"
                   type="password"
-                  value={formState.password}
-                  onChange={handleChange}
+                  placeholder="Password..."
+                  name="password"
+                  onChange={handleInputChange}
+                  value={userFormData.password}
+                  required
                 />
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
-            )}
+              </Form.Group>
+            </div>
+            <br></br>
 
-            {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-              </div>
-            )}
-          </div>
+            <Button
+              className="bg-[#000000] hover:bg-orange-700 hover:border-black text-white font-bold py-2 px-4 border border-[#f06c00] rounded flex justify-center items-center"
+              disabled={!(userFormData.email && userFormData.password)}
+              type="submit"
+              variant="success"
+            >
+              Login
+            </Button>
+
+            <Form.Group className="flex flex-col items-center justify-center mt-8">
+              <h1 className="my-2 text-xs">Don't have an account ? </h1>
+
+              <Link
+                className=" btn-xs bg-slate-900 hover:bg-orange-700 hover:border-black text-white font-bold py-2 px-4 border rounded border-[#f06c00] flex justify-center items-center"
+                as={Link}
+                to="/signup"
+              >
+                Sign Up!
+              </Link>
+            </Form.Group>
+          </Form>
         </div>
       </div>
-    </main>
+    </div>
+    </>
   );
 };
 
 export default Login;
+
