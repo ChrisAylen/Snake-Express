@@ -14,7 +14,7 @@ const AppNavbar = () => {
 
         <Container className="flex flex-row items-center justify-end" fluid>
           <Navbar.Brand 
-          className="hover:bg-orange-700 text-white text-2xl py-2  px-10"
+          className="hover:bg-green-700 text-white text-2xl py-2  px-10"
           style={{textShadow: "rgba(255, 68, 0, 0.918) 0 10px 20px"}}
           as={Link} to='/'>
             Home
