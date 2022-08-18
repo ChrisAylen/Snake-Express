@@ -13,7 +13,7 @@ import Game from './components/Game';
 import HighScores from './components/HighScores';
 import Navbar from './components/Navbar';
 import NewRules from './components/NewRules';
-import PrivateRoute from './PrivateRoute.js';
+import PrivateRoute from './privateRoute.js';
 import GameOverWon from './components/GameOverWin';
 import GameOverLose from './components/GameOverLose';
 
@@ -21,8 +21,8 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Snake from './pages/Snake';
 import Login from './pages/Login';
-import Header from './components/Header';
-import Footer from './components/Footer';
+//import Header from './components/Header';
+//import Footer from './components/Footer';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -74,6 +74,7 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/rules" element={<NewRules />} />
+          <Route path="/snake" element={<Snake />} />
           <Route 
           exact 
           path="/highscores" 
