@@ -20,4 +20,4 @@ const scoreSchema = new Schema({
 
 const Score = model('Score', scoreSchema);
 
-module.exports = Thought;
+module.exports = Score;
