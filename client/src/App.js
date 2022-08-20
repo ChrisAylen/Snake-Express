@@ -10,7 +10,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import Game from './components/Game';
-import HighScores from './components/HighScores';
 import Navbar from './components/Navbar';
 import NewRules from './components/NewRules';
 import PrivateRoute from './privateRoute.js';
@@ -21,6 +20,10 @@ import Home from './components/Home';
 import Signup from './components/Signup';
 import Snake from './components/Snake';
 import Login from './components/Login';
+
+
+import HighScores from './components/highscores/HighScores'
+import './components/highscores/highscores.css';
 //import Header from './components/Header';
 //import Footer from './components/Footer';
 
