@@ -1,23 +1,28 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
+// Create a score model that includes a pointer to user, score, and date
 const scoreSchema = new Schema({
-  scoreText: {
-    type: Number,
-    trim: true,
-  },
-  scoreAuthor: {
+  
+  username: {
+    
     type: String,
     required: true,
     trim: true,
+    },
+  score: {
+    type: Number,
+    required: true,
   },
-  createdAt: {
+  createdDate: {
     type: Date,
     default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
+    required: true,
   },
 });
 
-const Score = model('Score', scoreSchema);
+
+
+const Score = model('score', scoreSchema);
 
 module.exports = Score;

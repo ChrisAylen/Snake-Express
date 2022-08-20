@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const scoreSchema = require('./Score');
 
 const userSchema = new Schema({
   username: {
@@ -19,10 +20,10 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  thoughts: [
+  scores: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Thought',
+      ref: 'Score',
     },
   ],
 });
