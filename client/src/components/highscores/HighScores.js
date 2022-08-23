@@ -7,7 +7,11 @@ import { useQuery } from '@apollo/client';
 
 import Navbar from '../Navbar';
 
-
+const data = [
+  { name: "Anom", score: 19000 },
+  { name: "Megha", score: 19250 },
+  { name: "Subham", score: 25000},
+]
 
 export default function Scores() {
 
@@ -20,17 +24,33 @@ export default function Scores() {
 
   return (
     <>
-    <Navbar/>
-    <div className="scores">
-        <h1 className='highScores'>HighScores</h1>
-
-        <div className="duration">
-            <button onClick={handleClick} data-id='0'>All-Time</button>
-        </div>
-
-    
-
+    <Navbar/> 
+    <br></br>
+    <br></br>
+    <br></br>
+    <h1 className="topScore"> All time Top-10 Scores</h1>
+    <br></br>
+    <br></br>
+    <br></br>
+    <div className="Highscore">
+      <table>
+        <tr className="mainRow">
+          <th>Name</th>
+          <th>Score</th>
+        </tr>
+        {data.map((val, key) => {
+          return (
+            <tr key={key}>
+              <td>{val.name}</td>
+              <td>{val.score}</td>
+            </tr>
+          )
+        })}
+      </table>
     </div>
+  ;
+
+
     </>
   )
 }
