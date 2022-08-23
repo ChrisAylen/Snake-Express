@@ -8,9 +8,9 @@ import { useQuery } from '@apollo/client';
 import Navbar from '../Navbar';
 
 const data = [
-  { name: "Anom", score: 19000 },
-  { name: "Megha", score: 19250 },
-  { name: "Subham", score: 25000},
+  { username: "Anom", score: 19000 },
+  { username: "Megha", score: 19250 },
+  { username: "Subham", score: 25000},
 ]
 
 export default function Scores() {
@@ -35,13 +35,13 @@ export default function Scores() {
     <div className="Highscore">
       <table>
         <tr className="mainRow">
-          <th>Name</th>
+          <th>Username</th>
           <th>Score</th>
         </tr>
         {data.map((val, key) => {
           return (
             <tr key={key}>
-              <td>{val.name}</td>
+              <td>{val.username}</td>
               <td>{val.score}</td>
             </tr>
           )

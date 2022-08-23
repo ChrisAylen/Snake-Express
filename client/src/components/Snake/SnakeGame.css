@@ -29,9 +29,14 @@
 	font-weight: bold;
 	text-decoration-line: underline;
 }
+#yourScore {
+	color: #98fb98;
+	font-weight: bold;
+	text-decoration-line: underline;
+}
 
 #GameBoard #PressSpaceText {
-	color: #2e7ecb;
+	color: #12406c;
 	font-weight: bold;
 }
 
