@@ -10,7 +10,7 @@ const Home = () => {
     <div className="Homepage flex flex-row items-center justify-center">
       
         <div>
-            <Link to = "/snake" ><button className="bg-[#000000] hover:bg-orange-700 text-white font-bold py-2 px-4 border border-[#f06c00] rounded mr-10">
+            <Link to = "/snake" ><button className="bg-green-800 hover:bg-green-500 text-white font-bold py-5 px-10 border border-black rounded mr-10">
                 Play Snake
             </button></Link>
         </div>

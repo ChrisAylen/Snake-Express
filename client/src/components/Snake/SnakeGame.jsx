@@ -1,6 +1,7 @@
 import React from 'react'
 import './SnakeGame.css'
 import GameOver from './GameOver.jsx'
+import Navbar from "../Navbar";
 
 class SnakeGame extends React.Component {
   constructor(props) {
@@ -370,6 +371,10 @@ class SnakeGame extends React.Component {
     }
 
     return (
+      <>
+      <Navbar />
+      <div className="Homepage flex flex-row items-center justify-center">
+      
       <div
         id='GameBoard'
         style={{
@@ -407,6 +412,8 @@ class SnakeGame extends React.Component {
           {this.state.score}
         </div>
       </div>
+      </div>
+      </>
     )
   }
 }
