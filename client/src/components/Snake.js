@@ -1,22 +1,35 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
+//import {useMutation} from "@apollo/client";
 
 import SnakeGame from './Snake/SnakeGame';
 
 import { QUERY_THOUGHTS } from '../utils/queries';
 
+import {ADD_SCORE} from "../utils/mutations";
+
 import Auth from '../utils/auth';
 
 const Home = () => {
   const { loading, data } = useQuery(QUERY_THOUGHTS);
-  const thoughts = data?.thoughts || [];
-
+  const [addScore] = useMutation(ADD_SCORE);
+const onUpdateScore = (score) => {
+  addScore({
+    variables: {
+      score
+    }
+  });
+}
+  
   if(Auth.loggedIn()) {
 
   return (
     <main>
       <div className="flex-row justify-center">
-        <SnakeGame />
+        {/* Add a prop */}
+        <SnakeGame
+        onUpdateScore={onUpdateScore}
+        />
       </div>
     </main>
   );
