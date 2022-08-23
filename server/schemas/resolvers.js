@@ -12,7 +12,7 @@ const resolvers = {
     },
     scores: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Score.find(params).sort({ createdAt: -1 });
+      return Score.find(params).sort({ score: -1 }).limit(10);
     },
     score: async (parent, { scoreId }) => {
       return Score.findOne({ _id: scoreId });
