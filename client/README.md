@@ -1,70 +1,156 @@
-# Getting Started with Create React App
+# Snake Express
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[]: # Language: markdown
+[]: # Path: README.md
 
-## Available Scripts
+![](https://img.shields.io/badge/license-MIT-blue.svg)
+    
+## Description
+    
+This is MERN stack application that allows the user to play Snake!  Additionally, it uses GraphQL for data management.
 
-In the project directory, you can run:
+The game keeps track of user scores using both local storage (just for local user scores) and Mongo DB for all user scores allowing the application to keep track of the all time top 10 scores.
 
-### `yarn start`
+## Table of Contents 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* [Installation](#installation)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* [Usage](#usage)
 
-### `yarn test`
+* [Screenshot](#screenshots)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* [Deployed Version](#deployment)
 
-### `yarn build`
+* [Docker](#docker)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* [Questions](#questions)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* [To Do](#todo)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Installation
+    
+'npm i' to install the necessary dependencies.
 
-### `yarn eject`
+If you are going to use a remote Mongo DB (e.g. Atlas) then create a file named .env with the following contents:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+MONGODB_URI=yourMongoStringGoesHere
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Setting up the database
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The application comes with some random seed data  To push this data into the database, do the following:
+```
+npm run seed
+```
 
-## Learn More
+## Usage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The application supports the following funcitonalities:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Users
+```
+1. Signup a new user
+2. Login an existing user
+```
+### Game
+```
+1. Play the snake game
+```
+### Scores
+```
+1. Display your local score and high score on game completion
+2. In the High score menu, see the top 10 all time scores
+```
 
-### Code Splitting
+## GraphQL / Apollo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The application utilises Apollo Client and as standard a sandbox environment can be found at:
 
-### Analyzing the Bundle Size
+localhost:3001/graphql
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+### Queries
+#### Get High Scores
+```
+query Scores {
+  scores {
+    username
+    score
+    createdDate
+  }
+}
+```
+### Mutations
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### Login
+```
+mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    token
+  }
+}
+```
+#### Add Score
+```
+mutation AddScore($score: Int!) {
+  addScore(score: $score) {
+    score
+  }
+}
+```
+#### Add User
+```
+```
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `yarn build` fails to minify
+## Screenshots
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![alt Homepage](/assets/images/homepage.png)
+
+![alt Accounts](/assets/images/Accounts.png)
+
+![alt Transfer](/assets/images/Transfer.png)
+
+![alt Statement](/assets/images/Statement.png)
+
+## API
+
+![alt Landing Page](/assets/images/API_Endpoints_available_from_the_FE.PNG)
+
+
+## Front End
+
+
+## Deployment
+
+[Deployed Version](https://peaceful-lassen-volcanic-80125.herokuapp.com/)
+
+## Docker
+
+[Docker Repository](https://hub.docker.com/r/chrisaylen/bankheist/)
+   
+## License
+    
+This project is licenced under MIT
+
+## Questions
+
+[More of my work can be found here](https://github.com/ChrisAylen)
+
+TODO: Add other team members Github links
+
+## ToDo
+
+The applicaiton needs:
+```
+    * More robust authentication on endpoints.  The current application allows any      
+      authenticated user to access any transactions.  This is not secure.
+    * Tests adding
+    
+```
+    
