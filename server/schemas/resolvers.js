@@ -10,8 +10,8 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('scores');
     },
-    scores: async (parent, { username }) => {
-      const params = username ? { username } : {};
+    scores: async (parent, { scores }) => {
+      const params = scores ? { score } : {};
       return Score.find(params).sort({ score: -1 }).limit(10);
     },
     score: async (parent, { scoreId }) => {

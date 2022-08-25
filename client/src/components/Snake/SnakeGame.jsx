@@ -10,7 +10,7 @@ class SnakeGame extends React.Component {
     super(props);
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.props.onUpdateScore(8000);
+    //this.props.onUpdateScore(8000);
 
     this.state = {
       width: 0,

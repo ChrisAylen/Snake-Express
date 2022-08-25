@@ -1,20 +1,27 @@
 import { useState } from 'react'
-import Profile from './Profile'; //BackEnd?
-import { HighScores } from './database'; //Backend
-import  {between} from '../../utils/dateFunction'
 import './highscores.css';
 import { useQuery } from '@apollo/client';
+import {QUERY_SCORE} from '../../utils/queries'
+import Auth from '../../utils/auth';
 
 import Navbar from '../Navbar';
 
-const data = [
-  { username: "Anom", score: 19000 },
-  { username: "Megha", score: 19250 },
-  { username: "Subham", score: 25000},
-]
+//Use QUERY_SCORES to get score data
+//const {scores} = useQuery(QUERY_SCORES)
+
+
+
+// const data = [
+//   { username: "Anom", score: 19000 },
+//   { username: "Megha", score: 19250 },
+//   { username: "Subham", score: 25000},
+// ]
 
 export default function Scores() {
-
+  const { loading, data } = useQuery(QUERY_SCORE);
+  //console.log(data)
+  const scores = data?.scores || [];
+  //console.log(scores)
     const [allTime, setallTime] = useState(0);
 
   const handleClick = (e) => {
@@ -38,14 +45,17 @@ export default function Scores() {
           <th>Username</th>
           <th>Score</th>
         </tr>
-        {data.map((val, key) => {
+        {loading ? (
+            <div>Loading...</div>
+          ) :<>
+        {scores.map((val, key) => {
           return (
             <tr key={key}>
               <td>{val.username}</td>
               <td>{val.score}</td>
             </tr>
           )
-        })}
+        })}</>}
       </table>
     </div>
   ;
