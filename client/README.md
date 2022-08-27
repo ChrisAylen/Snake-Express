@@ -7,7 +7,7 @@
     
 ## Description
     
-This is MERN stack application that allows the user to play Snake!  Additionally, it uses GraphQL for data management.
+This is a MERN stack application that allows the user to play Snake!  Additionally, it uses GraphQL for data management.
 
 The game keeps track of user scores using both local storage (just for local user scores) and Mongo DB for all user scores allowing the application to keep track of the all time top 10 scores.
 
@@ -17,11 +17,13 @@ The game keeps track of user scores using both local storage (just for local use
 
 * [Usage](#usage)
 
-* [Screenshot](#screenshots)
+* [Screenshots](#screenshots)
 
 * [Deployed Version](#deployment)
 
-* [Docker](#docker)
+* [Credits](#credits)
+
+* [Licence](#license)
 
 * [Questions](#questions)
 
@@ -31,7 +33,7 @@ The game keeps track of user scores using both local storage (just for local use
     
 'npm i' to install the necessary dependencies.
 
-If you are going to use a remote Mongo DB (e.g. Atlas) then create a file named .env with the following contents:
+If you are going to use a remote Mongo DB (e.g. Atlas) then you will need to configure an environmental variable with the following contents:
 
 ```
 MONGODB_URI=yourMongoStringGoesHere
@@ -101,38 +103,62 @@ mutation AddScore($score: Int!) {
 }
 ```
 #### Add User
+
+##### Request
 ```
+mutation AddUser($username: String!, $email: String!, $password: String!) {
+  addUser(username: $username, email: $email, password: $password) {
+    user {
+      username
+    }
+  }
+}
 ```
-
-
-
+##### Header
+```
+{  "username": "test2",
+  "email": "test2@test.com",
+  "password": "SuperDuperSecretPassword"
+}
+```
 
 
 ## Screenshots
 
-![alt Homepage](/assets/images/homepage.png)
+![alt Homepage](/images/Home%20Page%20-%20SignIn.png)
 
-![alt Accounts](/assets/images/Accounts.png)
+![alt Homepage](/images/Home%20Page%20-%20Logged%20In.png)
 
-![alt Transfer](/assets/images/Transfer.png)
+![alt Sign Up](/images/SignUpForm.png)
 
-![alt Statement](/assets/images/Statement.png)
+![alt Sign In](/images/SignInForm.png)
 
-## API
+![alt Rules](/images/Rules.png)
 
-![alt Landing Page](/assets/images/API_Endpoints_available_from_the_FE.PNG)
+![Snake Game](/images/SnakeGameScreen.png)
 
+![High Scores](/images/HighScores.png)
 
-## Front End
+![Apollo Sandbox](/images/ApolloSandbox.png)
 
 
 ## Deployment
 
-[Deployed Version](https://peaceful-lassen-volcanic-80125.herokuapp.com/)
+[Deployed Version](https://obscure-ridge-72385.herokuapp.com/)
 
-## Docker
+## Credits
+This project was a collaboration between:
 
-[Docker Repository](https://hub.docker.com/r/chrisaylen/bankheist/)
+
+* [Matteo Sanna](https://github.com/mattesanna017)
+
+* [Tamin](https://github.com/tamin96)
+
+* [Chris Aylen](https://github.com/ChrisAylen)
+
+### Game engine was based on:
+
+[react-simple-snake](https://github.com/MaelDrapier/react-simple-snake) by Maël Drapier
    
 ## License
     
@@ -142,15 +168,13 @@ This project is licenced under MIT
 
 [More of my work can be found here](https://github.com/ChrisAylen)
 
-TODO: Add other team members Github links
-
 ## ToDo
 
 The applicaiton needs:
 ```
-    * More robust authentication on endpoints.  The current application allows any      
-      authenticated user to access any transactions.  This is not secure.
+    * Better password management
     * Tests adding
+    * Different Snake modes
     
 ```
     
